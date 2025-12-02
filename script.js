@@ -1,9 +1,9 @@
 // Hello Clever API Configuration
 const HELLO_CLEVER_CONFIG = {
     BWP: {
-        apiUrl: 'https://api.cleverhub.co/api/v3/payin_links',
-        appId: 'app-41a60377ba920919939d83326ebee5a1',
-        secretKey: 'AK_SANDBOX_7ca82727d0aa264cd913415f01034e7d0f7bc2e147390fe369aa37bd03603f2e'
+        apiUrl: 'https://api-merchant.rc.cleverhub.co/api/v3/payin_links',
+        appId: 'app-64f1f27bf1b4ec22924fd0acb550c235',
+        secretKey: 'AK_RC_0af02e8dc4089280bb7defa574d35c2b77f9beb413f09255e9d7adb19c533f50'
     },
     JPY: {
         apiUrl: 'https://api.cleverhub.co/api/v3/payin_links',
@@ -20,11 +20,11 @@ const HELLO_CLEVER_CONFIG = {
 // Mock data for each currency
 const MOCK_DATA = {
     BWP: {
-        description: "Forex Account Deposit - Sandra Lin",
+        description: "Testing payin flow pgv3",
         sender_info: {
-            email: "sandra.lin@gmail.com",
-            first_name: "Sandra",
-            last_name: "Lin",
+            email: "ryan.nguyen@gmail.com",
+            first_name: "Ryan",
+            last_name: "Nguyen",
             dob: "1990-01-01",
             reg_no: "A1234567",
             phone: "+26774567890",
@@ -102,7 +102,7 @@ async function mockHelloCleverPayment(paymentData) {
 }
 
 // Validate deposit amount for a specific input
-function validateAmount(inputElement, errorElement) {
+function validateAmount(inputElement, errorElement, currency) {
     const amount = parseFloat(inputElement.value);
     
     if (!inputElement.value || inputElement.value.trim() === '') {
@@ -115,9 +115,21 @@ function validateAmount(inputElement, errorElement) {
         return false;
     }
     
-    if (amount > 1000000) {
-        showAmountError(inputElement, errorElement, 'Max: 1,000,000');
-        return false;
+    // Currency-specific validation
+    if (currency === 'KRW') {
+        if (amount < 10000) {
+            showAmountError(inputElement, errorElement, 'Min: 10,000 KRW');
+            return false;
+        }
+        if (amount > 50000000) {
+            showAmountError(inputElement, errorElement, 'Max: 50,000,000 KRW');
+            return false;
+        }
+    } else {
+        if (amount > 1000000) {
+            showAmountError(inputElement, errorElement, 'Max: 1,000,000');
+            return false;
+        }
     }
     
     clearAmountError(inputElement, errorElement);
@@ -168,8 +180,8 @@ async function processCurrencyPayment(currency, button) {
     const amountInput = currencyBox.querySelector('.deposit-amount-input');
     const errorElement = currencyBox.querySelector('.error-message');
     
-    // Validate amount first
-    if (!validateAmount(amountInput, errorElement)) {
+    // Validate amount first with currency-specific rules
+    if (!validateAmount(amountInput, errorElement, currency)) {
         // Focus on amount input
         amountInput.focus();
         return;
