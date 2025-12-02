@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandra Lin - Forex Deposit</title>
+    <title>HC Sandra Lin - Forex</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -186,6 +186,141 @@
                         <path d="M8 0L2 3V7C2 10.866 4.733 14.421 8 15C11.267 14.421 14 10.866 14 7V3L8 0Z" fill="currentColor"/>
                     </svg>
                     <span>Secured by Hello Clever Payment Gateway</span>
+                </div>
+            </div>
+
+            <!-- API Code Samples Section -->
+            <div class="card code-samples-card">
+                <div class="code-header">
+                    <h2>Simple API Integration</h2>
+                    <p class="code-subtitle">Get started with just a single API call. Choose your currency below:</p>
+                </div>
+
+                <div class="code-tabs">
+                    <button class="code-tab active" data-currency="BWP">🇧🇼 BWP</button>
+                    <button class="code-tab" data-currency="JPY">🇯🇵 JPY</button>
+                    <button class="code-tab" data-currency="KRW">🇰🇷 KRW</button>
+                </div>
+
+                <div class="code-content">
+                    <!-- BWP Code -->
+                    <div class="code-block active" id="code-BWP">
+                        <div class="code-block-header">
+                            <span class="code-language">CURL</span>
+                            <button class="copy-btn" data-currency="BWP">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M10.5 2H3.5C2.67 2 2 2.67 2 3.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    <rect x="5.5" y="5.5" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl --location 'https://api-merchant.rc.cleverhub.co/api/v3/payin_links' \
+--header 'app-id: app-64f1f27bf1b4ec22924fd0acb550c235' \
+--header 'secret-key: AK_RC_0af02e8dc4089280bb7defa574d35c2b77f9beb413f09255e9d7adb19c533f50' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "amount": 162,
+  "description": "Testing payin flow pgv3",
+  "sender_info": {
+    "email": "ryan.nguyen@gmail.com",
+    "first_name": "Ryan",
+    "last_name": "Nguyen",
+    "dob": "1990-01-01",
+    "reg_no": "A1234567",
+    "phone": "+26774567890",
+    "country_code": "BW",
+    "address": "Plot 1245, Independence Avenue, Gaborone, Botswana",
+    "account_number": "+26774567890",
+    "document_type": "Passport",
+    "document_number": "B1234567"
+  }
+}'</code></pre>
+                    </div>
+
+                    <!-- JPY Code -->
+                    <div class="code-block" id="code-JPY">
+                        <div class="code-block-header">
+                            <span class="code-language">CURL</span>
+                            <button class="copy-btn" data-currency="JPY">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M10.5 2H3.5C2.67 2 2 2.67 2 3.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    <rect x="5.5" y="5.5" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl --location 'https://api.cleverhub.co/api/v3/payin_links' \
+--header 'app-id: app-4476b929e30dd0c4e8bdbcc82c6ba23a' \
+--header 'secret-key: AK_SANDBOX_98395cb5939068ef66110975fb3642af32510a02a2156599ecc9759daec3e969' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "amount": 1200,
+  "description": "Demo multi-currency gateway",
+  "redirect_url": {
+    "success": "https://testing-minimoo.cleverpay.store/success"
+  },
+  "sender_info": {
+    "email": "luyx@getkollo.com",
+    "first_name": "ニエン",
+    "last_name": "チュオン"
+  }
+}'</code></pre>
+                    </div>
+
+                    <!-- KRW Code -->
+                    <div class="code-block" id="code-KRW">
+                        <div class="code-block-header">
+                            <span class="code-language">CURL</span>
+                            <button class="copy-btn" data-currency="KRW">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M10.5 2H3.5C2.67 2 2 2.67 2 3.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    <rect x="5.5" y="5.5" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl --location 'https://api.cleverhub.co/api/v3/payin_links' \
+--header 'app-id: app-4476b929e30dd0c4e8bdbcc82c6ba23a' \
+--header 'secret-key: AK_SANDBOX_98395cb5939068ef66110975fb3642af32510a02a2156599ecc9759daec3e969' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "amount": 200000,
+  "description": "Demo multi-currency gateway",
+  "redirect_url": {
+    "success": "https://testing-minimoo.cleverpay.store/success"
+  },
+  "sender_info": {
+    "email": "luyx@helloclever.co",
+    "first_name": "John",
+    "last_name": "Doe"
+  }
+}'</code></pre>
+                    </div>
+                </div>
+
+                <div class="code-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">
+                            <h4>Quick Integration</h4>
+                            <p>Single API call to create payment links</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <div class="feature-text">
+                            <h4>Multi-Currency</h4>
+                            <p>Supporting 18+ currencies worldwide</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-text">
+                            <h4>Secure & Reliable</h4>
+                            <p>Enterprise-grade security standards</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

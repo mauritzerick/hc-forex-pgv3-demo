@@ -411,3 +411,69 @@ window.addEventListener('resize', () => {
         drawHoldingsChart();
     }, 250);
 });
+
+// ==================== CODE SAMPLES TABS ====================
+
+// Tab switching functionality
+const codeTabs = document.querySelectorAll('.code-tab');
+const codeBlocks = document.querySelectorAll('.code-block');
+
+codeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const currency = tab.getAttribute('data-currency');
+        
+        // Update active tab
+        codeTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update visible code block
+        codeBlocks.forEach(block => {
+            if (block.id === `code-${currency}`) {
+                block.classList.add('active');
+            } else {
+                block.classList.remove('active');
+            }
+        });
+    });
+});
+
+// Copy to clipboard functionality
+const copyButtons = document.querySelectorAll('.copy-btn');
+
+copyButtons.forEach(button => {
+    button.addEventListener('click', async () => {
+        const currency = button.getAttribute('data-currency');
+        const codeBlock = document.querySelector(`#code-${currency} code`);
+        const code = codeBlock.textContent;
+        
+        try {
+            await navigator.clipboard.writeText(code);
+            
+            // Visual feedback
+            const originalText = button.innerHTML;
+            button.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Copied!
+            `;
+            button.style.background = 'rgba(16, 185, 129, 0.2)';
+            button.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.style.borderColor = '';
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy code:', err);
+            
+            // Fallback feedback
+            const originalText = button.innerHTML;
+            button.innerHTML = '❌ Failed';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+            }, 2000);
+        }
+    });
+});
