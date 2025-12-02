@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandra Lin - Forex Deposit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-section">
+                <div class="avatar">
+                    <img src="profile.png" alt="Sandra Lin">
+                </div>
+                <div class="user-info">
+                    <h1>Sandra Lin</h1>
+                    <p class="subtitle">God-Tier FX Trader</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Choose Your Deposit Currency</h2>
+                    <p class="card-subtitle">Enter amount and select your preferred currency</p>
+                </div>
+                
+                <div class="currency-grid">
+                    <div class="currency-box" data-currency="BWP">
+                        <div class="currency-badge">
+                            <span class="currency-icon">🇧🇼</span>
+                        </div>
+                        <div class="currency-details">
+                            <h3>BWP</h3>
+                            <p class="currency-name">Botswana Pula</p>
+                        </div>
+                        <div class="amount-input-section">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="number" 
+                                    class="deposit-amount-input" 
+                                    placeholder="Enter amount"
+                                    min="1"
+                                    step="0.01"
+                                    required
+                                >
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+                        <button class="btn-currency">
+                            <span>Deposit Now</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="currency-box" data-currency="JPY">
+                        <div class="currency-badge">
+                            <span class="currency-icon">🇯🇵</span>
+                        </div>
+                        <div class="currency-details">
+                            <h3>JPY</h3>
+                            <p class="currency-name">Japanese Yen</p>
+                        </div>
+                        <div class="amount-input-section">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="number" 
+                                    class="deposit-amount-input" 
+                                    placeholder="Enter amount"
+                                    min="1"
+                                    step="0.01"
+                                    required
+                                >
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+                        <button class="btn-currency">
+                            <span>Deposit Now</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+
+                    <div class="currency-box" data-currency="KRW">
+                        <div class="currency-badge">
+                            <span class="currency-icon">🇰🇷</span>
+                        </div>
+                        <div class="currency-details">
+                            <h3>KRW</h3>
+                            <p class="currency-name">South Korean Won</p>
+                        </div>
+                        <div class="amount-input-section">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="number" 
+                                    class="deposit-amount-input" 
+                                    placeholder="Enter amount"
+                                    min="1"
+                                    step="0.01"
+                                    required
+                                >
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+                        <button class="btn-currency">
+                            <span>Deposit Now</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="security-note">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 0L2 3V7C2 10.866 4.733 14.421 8 15C11.267 14.421 14 10.866 14 7V3L8 0Z" fill="currentColor"/>
+                    </svg>
+                    <span>Secured by Hello Clever Payment Gateway</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for payment processing -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Processing Payment</h2>
+            </div>
+            <div class="modal-body">
+                <div id="modalMessage">
+                    <p>Redirecting to Hello Clever payment gateway...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
