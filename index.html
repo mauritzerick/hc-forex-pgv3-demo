@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="clever-logo clever-logo-left">
+        <img src="clever-icon-standard.svg" alt="Hello Clever">
+    </div>
+    
+    <div class="clever-logo clever-logo-right">
+        <img src="clever-icon-standard.svg" alt="Hello Clever">
+    </div>
+
     <div class="container">
         <header>
             <div class="profile-section">
@@ -21,6 +29,69 @@
         </header>
 
         <main>
+            <!-- Holdings Chart Section -->
+            <div class="card chart-card">
+                <div class="chart-header">
+                    <h2>Portfolio Holdings</h2>
+                    <div class="chart-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Balance</span>
+                            <span class="stat-value">$124,580.00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Today's P&L</span>
+                            <span class="stat-value positive">+$2,340.00 (+1.92%)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <canvas id="holdingsChart" width="800" height="300"></canvas>
+                
+                <div class="currency-holdings">
+                    <div class="holding-item">
+                        <div class="holding-info">
+                            <span class="holding-flag">🇧🇼</span>
+                            <div class="holding-details">
+                                <span class="holding-currency">BWP</span>
+                                <span class="holding-name">Botswana Pula</span>
+                            </div>
+                        </div>
+                        <div class="holding-amount">
+                            <span class="holding-balance">42,580 BWP</span>
+                            <span class="holding-usd">≈ $3,200.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="holding-item">
+                        <div class="holding-info">
+                            <span class="holding-flag">🇯🇵</span>
+                            <div class="holding-details">
+                                <span class="holding-currency">JPY</span>
+                                <span class="holding-name">Japanese Yen</span>
+                            </div>
+                        </div>
+                        <div class="holding-amount">
+                            <span class="holding-balance">8,420,000 JPY</span>
+                            <span class="holding-usd">≈ $56,800.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="holding-item">
+                        <div class="holding-info">
+                            <span class="holding-flag">🇰🇷</span>
+                            <div class="holding-details">
+                                <span class="holding-currency">KRW</span>
+                                <span class="holding-name">South Korean Won</span>
+                            </div>
+                        </div>
+                        <div class="holding-amount">
+                            <span class="holding-balance">85,200,000 KRW</span>
+                            <span class="holding-usd">≈ $64,580.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <h2>Choose Your Deposit Currency</h2>

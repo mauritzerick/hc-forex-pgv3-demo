@@ -256,3 +256,158 @@ modal.addEventListener('click', (e) => {
         hideModal();
     }
 });
+
+// ==================== HOLDINGS CHART ====================
+
+// Generate mock portfolio data for the past 30 days
+function generatePortfolioData() {
+    const data = [];
+    const days = 30;
+    let value = 100000; // Starting value
+    
+    for (let i = 0; i < days; i++) {
+        // Random walk with slight upward trend
+        const change = (Math.random() - 0.45) * 3000;
+        value += change;
+        data.push(value);
+    }
+    
+    return data;
+}
+
+// Draw the futuristic chart
+function drawHoldingsChart() {
+    const canvas = document.getElementById('holdingsChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Set canvas size accounting for device pixel ratio
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    
+    const width = rect.width;
+    const height = rect.height;
+    const padding = { top: 20, right: 20, bottom: 40, left: 60 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+    
+    // Generate data
+    const data = generatePortfolioData();
+    const minValue = Math.min(...data) * 0.98;
+    const maxValue = Math.max(...data) * 1.02;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+    
+    // Draw grid lines (subtle)
+    ctx.strokeStyle = '#f0f0f0';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+        const y = padding.top + (chartHeight / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(width - padding.right, y);
+        ctx.stroke();
+    }
+    
+    // Draw Y-axis labels
+    ctx.fillStyle = '#9ca3af';
+    ctx.font = '12px Inter, sans-serif';
+    ctx.textAlign = 'right';
+    for (let i = 0; i <= 5; i++) {
+        const value = maxValue - (maxValue - minValue) * (i / 5);
+        const y = padding.top + (chartHeight / 5) * i;
+        ctx.fillText('$' + (value / 1000).toFixed(0) + 'K', padding.left - 10, y + 4);
+    }
+    
+    // Create gradient for area fill
+    const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+    gradient.addColorStop(0, 'rgba(0, 99, 226, 0.3)');
+    gradient.addColorStop(0.5, 'rgba(0, 99, 226, 0.1)');
+    gradient.addColorStop(1, 'rgba(0, 99, 226, 0)');
+    
+    // Draw area under the line
+    ctx.beginPath();
+    data.forEach((value, index) => {
+        const x = padding.left + (chartWidth / (data.length - 1)) * index;
+        const y = padding.top + chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
+        
+        if (index === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    });
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // Draw the main line (futuristic blue)
+    ctx.beginPath();
+    ctx.strokeStyle = '#0063E2';
+    ctx.lineWidth = 3;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    
+    data.forEach((value, index) => {
+        const x = padding.left + (chartWidth / (data.length - 1)) * index;
+        const y = padding.top + chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
+        
+        if (index === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    });
+    ctx.stroke();
+    
+    // Draw data points (last few)
+    const pointsToShow = 5;
+    for (let i = data.length - pointsToShow; i < data.length; i++) {
+        const value = data[i];
+        const x = padding.left + (chartWidth / (data.length - 1)) * i;
+        const y = padding.top + chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
+        
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 99, 226, 0.2)';
+        ctx.fill();
+        
+        // Inner dot
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#0063E2';
+        ctx.fill();
+    }
+    
+    // Draw X-axis labels (dates)
+    ctx.fillStyle = '#9ca3af';
+    ctx.font = '11px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    const dateLabels = ['30d ago', '20d', '10d', 'Today'];
+    dateLabels.forEach((label, index) => {
+        const x = padding.left + (chartWidth / (dateLabels.length - 1)) * index;
+        ctx.fillText(label, x, height - padding.bottom + 20);
+    });
+}
+
+// Initialize chart when page loads
+window.addEventListener('load', () => {
+    drawHoldingsChart();
+});
+
+// Redraw chart on window resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        drawHoldingsChart();
+    }, 250);
+});

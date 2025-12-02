@@ -30,6 +30,34 @@ body::before {
     z-index: 0;
 }
 
+/* Clever Logo */
+.clever-logo {
+    position: fixed;
+    top: 30px;
+    z-index: 100;
+    animation: fadeInDown 0.6s ease;
+}
+
+.clever-logo-left {
+    left: 230px;
+}
+
+.clever-logo-right {
+    right: 230px;
+}
+
+.clever-logo img {
+    width: 48px;
+    height: 48px;
+    display: block;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.clever-logo:hover img {
+    transform: scale(1.1);
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -316,6 +344,137 @@ header {
     color: #10b981;
 }
 
+/* Holdings Chart Card */
+.chart-card {
+    margin-bottom: 30px;
+}
+
+.chart-header {
+    margin-bottom: 30px;
+}
+
+.chart-header h2 {
+    color: #1a1a1a;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.chart-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.stat-value.positive {
+    color: #10b981;
+}
+
+.stat-value.negative {
+    color: #ef4444;
+}
+
+/* Chart Canvas */
+#holdingsChart {
+    width: 100% !important;
+    height: 300px !important;
+    margin-bottom: 30px;
+}
+
+/* Currency Holdings List */
+.currency-holdings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.holding-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+
+.holding-item:hover {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.holding-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.holding-flag {
+    font-size: 2rem;
+}
+
+.holding-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.holding-currency {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+}
+
+.holding-name {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.holding-amount {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+}
+
+.holding-balance {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.holding-usd {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
 /* Modal Styles */
 .modal {
     display: none;
@@ -469,6 +628,39 @@ header {
 @media (max-width: 768px) {
     body {
         padding: 30px 15px;
+    }
+
+    .clever-logo {
+        top: 20px;
+    }
+
+    .clever-logo-left {
+        left: 60px;
+    }
+
+    .clever-logo-right {
+        right: 60px;
+    }
+
+    .clever-logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .chart-stats {
+        gap: 20px;
+    }
+
+    .stat-value {
+        font-size: 1.4rem;
+    }
+
+    .holding-item {
+        padding: 16px;
+    }
+
+    .holding-flag {
+        font-size: 1.6rem;
     }
 
     .profile-section {
